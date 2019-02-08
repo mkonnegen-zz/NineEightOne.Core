@@ -16,27 +16,25 @@ variables:
 
 steps:
 - task: DotNetCoreInstaller@0
+  displayName: 'Install .NET Core SDK 2.2.103'
+  continueOnError: false
   inputs:
     packageType: 'sdk'
     version: '2.2.103'
 
-- task: NuGetToolInstaller@0
+- task: DotNetCoreCLI@2
+  displayName: 'Restore packages'
   inputs:
-    versionSpec: '4.9.3'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    includeNuGetOrg: true
-    verbosityRestore: Detailed
+    command: restore
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build project'
   inputs:
     command: build
     arguments: '--no-restore'
     configuration: '$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Run tests'
   inputs:
     command: test
