@@ -41,3 +41,9 @@ steps:
   inputs:
     command: test
     publishTestResults: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName: '981_core_build'
+    TargetPath: $(Build.ArtifactStagingDirectory)
+    
