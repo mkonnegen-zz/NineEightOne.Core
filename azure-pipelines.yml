@@ -4,12 +4,6 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
 name: '$(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)'
-resources:
-  repositories:
-    - repository: 'NineEightOne_Core_Repository'
-      type: github
-      name: 'mkonnegen\NineEightOne.Core'
-      endpoint: 'Github_mkonnegen'
 trigger:
 - master
 
@@ -33,6 +27,8 @@ steps:
   displayName: 'Restore packages'
   inputs:
     command: restore
+    projects: '**/*.csproj'
+    verbosityRestore: Detailed
 
 - task: DotNetCoreCLI@2
   displayName: 'Build project'
@@ -40,8 +36,10 @@ steps:
     command: build
     arguments: '--no-restore'
     configuration: '$(buildConfiguration)'
+    includeNuGetOrg: true   
 
 - task: DotNetCoreCLI@2
   displayName: 'Run tests'
   inputs:
     command: test
+    publishTestResults: true
