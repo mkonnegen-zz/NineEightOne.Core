@@ -8,7 +8,7 @@ resources:
   repositories:
     - repository: 'NineEightOne_Core_Repository'
       type: github
-      name: 'NineEightOne.Core'
+      name: 'mkonnegen\NineEightOne.Core'
       endpoint: 'Github_mkonnegen'
 trigger:
 - master
