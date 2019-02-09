@@ -11,8 +11,6 @@ pool:
   vmImage: ubuntu-16.04
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 - task: DotNetCoreInstaller@0
