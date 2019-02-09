@@ -13,6 +13,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   
+steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Install .NET Core SDK 2.2.103'
   continueOnError: false
