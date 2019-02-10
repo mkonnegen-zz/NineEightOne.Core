@@ -42,8 +42,16 @@ steps:
     command: test
     publishTestResults: true
 
+- task: DotNetCoreCLI@2
+  displayName: 'Create nuget package'
+  inputs:
+    command: pack
+    packagesToPack: '**/*.csproj'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
+    verbosityPack: Detailed
+
 - task: PublishPipelineArtifact@0
   inputs:
     ArtifactName: '981_core_build'
-    TargetPath: $(Build.SourcesDirectory)
+    TargetPath: $(Build.ArtifactStagingDirectory)
     
