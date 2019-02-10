@@ -32,9 +32,9 @@ steps:
   displayName: 'Build project'
   inputs:
     command: build
-    arguments: '--no-restore'
+    arguments: '--no-restore --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)'
     configuration: '$(buildConfiguration)'
-    includeNuGetOrg: true   
+    includeNuGetOrg: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Run tests'
@@ -45,5 +45,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: '981_core_build'
-    TargetPath: $(Build.ArtifactStagingDirectory)
+    TargetPath: $(Build.BinariesDirectory)
     
