@@ -42,7 +42,7 @@ steps:
     command: test
     publishTestResults: true
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@0
   inputs:
     ArtifactName: '981_core_build'
     TargetPath: $(Build.BinariesDirectory)
