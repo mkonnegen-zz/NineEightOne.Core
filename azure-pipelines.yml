@@ -45,5 +45,5 @@ steps:
 - task: PublishPipelineArtifact@0
   inputs:
     ArtifactName: '981_core_build'
-    TargetPath: $(Build.BinariesDirectory)
+    TargetPath: $(Build.SourcesDirectory)
     
