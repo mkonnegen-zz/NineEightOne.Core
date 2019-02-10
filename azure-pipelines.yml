@@ -45,6 +45,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Create nuget package'
   inputs:
+    arguments: '--no-restore --no-build --include-symbols'
     command: pack
     packagesToPack: '**/*.csproj'
     packDirectory: '$(Build.ArtifactStagingDirectory)'
