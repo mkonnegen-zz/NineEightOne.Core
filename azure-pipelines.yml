@@ -23,6 +23,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore packages'
+  continueOnError: false
   inputs:
     command: restore
     projects: '**/*.csproj'
@@ -30,6 +31,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'Build project'
+  continueOnError: false
   inputs:
     command: build
     arguments: '--no-restore --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)'
@@ -38,12 +40,15 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'Run tests'
+  continueOnError: false
   inputs:
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
     command: test
     publishTestResults: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Create nuget package'
+  continueOnError: false
   inputs:
     arguments: '--no-restore --no-build --include-symbols'
     command: pack
@@ -52,6 +57,7 @@ steps:
     verbosityPack: Detailed
 
 - task: PublishPipelineArtifact@0
+  continueOnError: false
   inputs:
     ArtifactName: '981_core_build'
     TargetPath: $(Build.ArtifactStagingDirectory)
